@@ -4,10 +4,9 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 class TestTask  extends DefaultTask{
-    String message = "default message"
-
     @TaskAction
     def doSomething() {
-        println("This is doSomething() with message: $message")
+        def outputMessage = project.extensions.testPlugin.someConfig ?: "Default Message"
+        println("This is doSomething() with message: $outputMessage")
     }
 }
