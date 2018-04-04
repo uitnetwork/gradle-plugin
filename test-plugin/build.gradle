@@ -12,12 +12,26 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+task createClasspathManifest {
+    def outputDir = file("$buildDir/$name")
+
+    inputs.files sourceSets.main.runtimeClasspath
+    outputs.dir outputDir
+
+    doLast {
+        outputDir.mkdirs()
+        file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+    }
+}
+
 dependencies {
+    testRuntime files(createClasspathManifest)
     compile gradleApi()
     compile localGroovy()
 
     testCompile gradleTestKit()
     testCompile "junit:junit:4.+"
+    testCompile 'org.assertj:assertj-core:3.9.1'
 }
 
 publishing {
@@ -29,3 +43,4 @@ publishing {
 
     }
 }
+
