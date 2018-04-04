@@ -7,6 +7,6 @@ class TestTask  extends DefaultTask{
     @TaskAction
     def doSomething() {
         def outputMessage = project.extensions.testPlugin.someConfig ?: "Default Message"
-        println("This is doSomething() with message: $outputMessage")
+        println("HelloWorld from TestPlugin with message: $outputMessage")
     }
 }

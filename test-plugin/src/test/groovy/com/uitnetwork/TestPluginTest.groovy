@@ -3,7 +3,7 @@ package com.uitnetwork
 import org.gradle.testkit.runner.GradleRunner
 
 import static org.assertj.core.api.Assertions.assertThat
-import static org.gradle.testkit.runner.TaskOutcome.UP_TO_DATE
+import static org.gradle.testkit.runner.TaskOutcome.SUCCESS
 
 class TestPluginTest extends GroovyTestCase {
     def projectDir = new File(System.getProperty("user.dir") + "/testProjects")
@@ -14,10 +14,10 @@ class TestPluginTest extends GroovyTestCase {
         def result = GradleRunner.create()
                 .withProjectDir(projectDir)
                 .withPluginClasspath(pluginClasspath)
-                .withArguments("hello")
+                .withArguments("helloWorld")
                 .build()
 
-        assertThat(UP_TO_DATE).isEqualTo(result.task(":helloWorld").getOutcome())
+        assertThat(SUCCESS).isEqualTo(result.task(":helloWorld").getOutcome())
         assertThat(result.output).contains("HelloWorld from TestPlugin")
     }
 
