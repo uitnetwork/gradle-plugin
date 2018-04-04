@@ -7,8 +7,15 @@ class TestPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.task("helloWorld") {
-            println("HelloWorld from TestPlugin")
+        project.task("helloWorld", type : TestTask) {
+            group = "ABC"
+            description = "This is just a hello world"
         }
+        project.task("helloWorld2", type: TestTask) {
+            group = "ABC"
+            description = "This is just a hello world 2"
+            message = "overriden message"
+        }
+
     }
 }
